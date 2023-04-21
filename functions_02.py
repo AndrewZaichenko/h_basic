@@ -1,3 +1,22 @@
+import time
+
+
+def time_of_execution(func):
+  def time_wrapper(*args, **kwargs):
+    seconds_from_begin = time.time()
+    print("The runtime is >>>", time.ctime(seconds_from_begin))
+    start_time = time.time()
+    multiply_result = func(*args, **kwargs)
+    end_time = time.time()
+    duration = end_time - start_time
+    print(f"The start time is >>> {start_time} sec.")
+    print(f"The end time is >>> {end_time} sec.")
+    print(f"Duration of execution >>> {duration} sec.")
+    return multiply_result
+
+  return time_wrapper
+
+
 # Задача 1
 # За допомогою вбудованої функції filer та додаткової функції, відфільтруйте тільки українські міста.
 

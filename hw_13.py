@@ -3,8 +3,7 @@ import string
 import pprint
 
 # Крок 1
-# Створіть за допомогою модуля OS дерикторію "Harry Potter". В середині дерикторії
-# Harry Potter створіть 8 дерикторій з назвою кожної частни. (Є прихований код)
+# Створюємо за допомогою модуля OS дерикторію "Harry Potter" та в середині 8 дерикторій з назвою кожної частни.
 
 harry_potter_films_titles = {
     "results": [
@@ -44,34 +43,31 @@ harry_potter_films_titles = {
 }
 
 # print(os.getcwd())
-# os.mkdir("Harry Potter")
-# os.chdir("Harry Potter")
+os.mkdir("Harry Potter")
+os.chdir("Harry Potter")
 # print(os.getcwd())
-# for hp_title in harry_potter_films_titles["results"]:
-#     print(hp_title["title"])
-#     os.mkdir(hp_title["title"].replace(":", ""))
+for hp_title in harry_potter_films_titles["results"]:
+    print(hp_title["title"], "- directory has been created.")
+    os.mkdir(hp_title["title"].replace(":", ""))
 
 
 # Крок 2
-# В середині дерикторій кожної частини фільму створіть теки(дерикторії)
-# від A до Z. Використовуйте модуль OS. Підказка: Зверни увагу на модуль string
+# В середині дерикторій кожної частини фільму cтворюємо теки (дерикторії) від A до Z.
 
 # print(os.getcwd())
-# # os.chdir("Harry Potter")
-# dir_list = os.listdir(os.getcwd())
+# os.chdir("Harry Potter")
+dir_list = os.listdir(os.getcwd())
 # print(dir_list)
-#
-# for movie_folder in dir_list:
-#     os.chdir(movie_folder)
-#     for i in string.ascii_uppercase:
-#         os.mkdir(i)
-#     os.chdir("..")
+
+for movie_folder in dir_list:
+    os.chdir(movie_folder)
+    for i in string.ascii_uppercase:
+        os.mkdir(i)
+    os.chdir("..")
 
 
 # Крок 3
-# (Є прихований код) Для кожного фільму створіть новий список, він має зберігати словники
-# з ключем award_name та його значенням, ключем award та його значенням, ключем type та його значенням.
-
+# Для кожного фільму cтворюємо новий список, він зберігає словники з ключами award_name, award, type та їх значеннями.
 
 harry_potter_films_awards = [
     {'links': {'next': None, 'previous': None},
@@ -3851,18 +3847,13 @@ print(hp_titles_list)
 awards_list = {}
 key_template = ('type', 'award_name', 'award')
 temp_dict = {}
-# temp_title_dict = temp_dict.fromkeys(hp_titles_list)
-# print(temp_title_dict)
-
-# print(len(harry_potter_films_awards))
 
 for movie_title in hp_titles_list:
-    print(movie_title)
+    # print(movie_title)
     for awards_item in harry_potter_films_awards:
-        # pprint.pprint(item["results"][0]["movie"]["title"])
         if movie_title == awards_item["results"][0]["movie"]["title"].replace(":", ""):
-            print("FUCK YEAH!!!")
-            print(awards_item["results"][0]["movie"]["title"].replace(":", ""))
+            # print("YEAH!!!")
+            # print(awards_item["results"][0]["movie"]["title"].replace(":", ""))
             temp_list = []
             for res_item in awards_item["results"]:
                 # print(res_item["award_name"])
@@ -3877,22 +3868,41 @@ for movie_title in hp_titles_list:
 pprint.pprint(awards_list)
 # print(awards_list)
 
-print(len(awards_list["Harry Potter and the Deathly Hallows Part 2"]))
-
-
-# for x in harry_potter_films_awards:
-#     x.pop('links')
-#     x.pop('count')
-#     for y in x['results']:
-#         y.pop('series')
-#         y.pop('actor')
-#         y.pop('event_name')
-#         y.pop('year')
-
-# pprint.pprint(harry_potter_films_awards)
-# print(harry_potter_films_awards)
-
 
 # Крок 4
-# Відсортуйте кожен список з нагородами за алфавітом по ключу award_name.
-# Використай sorted та lambda функції.
+# Сортуєм кожен список з нагородами за алфавітом по ключу award_name за допомогою sorted та lambda функції.
+
+for i in awards_list.values():
+    print(f"Unsorted \n {i}")
+    i = (sorted(i, key=lambda award: award['award_name']))
+    print(f"Sorted \n {i}")
+    print("**********************")
+
+
+# Крок 5 та Крок 6
+# Для кожного фільму у теках з літерами від A до Z створюємо txt файл з назвою (ключ award_name) нагороди яка починаєтья на відповідну літеру.
+# У файл з ім'ям кожної нагороди переносимо всі назви номінацій цієї(award) нагороди.
+
+print(os.getcwd())
+# os.chdir('Harry Potter')
+dir_list = os.listdir(os.getcwd())
+print(dir_list)
+for dir_title in dir_list:
+    print(dir_title)
+    for movie_title in awards_list:
+        if dir_title == movie_title:
+            print("Match")
+            print(movie_title)
+            os.chdir(dir_title)
+            letters_list = os.listdir(os.getcwd())
+            # print(letters_list)
+            for letter_dir in letters_list:
+                for x in awards_list[dir_title]:
+                    if x['award_name'][0] == letter_dir:
+                        # print("oh yea!")
+                        file_path = os.path.join(os.getcwd(), letter_dir, x['award_name'] + '.txt')
+                        with open(file_path, 'ab') as award_write:
+                            award_write.write(x['award'].encode('utf-8') + b'\n')
+                            print(f"The award '{x['award']}' is added to '{x['award_name']}.txt' in directory '{letter_dir}'.")
+
+            os.chdir('..')

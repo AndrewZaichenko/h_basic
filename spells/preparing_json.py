@@ -1,7 +1,7 @@
 import json
 
-film_awards = {
-  "links": {'next': None, 'previous': None},
+film_awards = \
+    {'links': {'next': None, 'previous': None},
   'count': 49,
   'results': [{'movie': {'imdb_id': 'tt1201607',
      'title': 'Harry Potter and the Deathly Hallows: Part 2'},
@@ -637,8 +637,8 @@ film_awards = {
     'year': 2011,
     'type': 'Winner',
     'award_name': 'World Soundtrack Award',
-    'award': 'Soundtrack Composer of the Year'}]},
- {'links': {'next': None, 'previous': None},
+    'award': 'Soundtrack Composer of the Year'}]}, \
+    {'links': {'next': None, 'previous': None},
   'count': 42,
   'results': [{'movie': {'imdb_id': 'tt0241527',
      'title': "Harry Potter and the Sorcerer's Stone"},
@@ -1133,8 +1133,8 @@ film_awards = {
     'year': 2002,
     'type': 'Winner',
     'award_name': 'Young Artist Award',
-    'award': 'Best Performance in a Feature Film - Leading Young Actress'}]},
- {'links': {'next': None, 'previous': None},
+    'award': 'Best Performance in a Feature Film - Leading Young Actress'}]}, \
+    {'links': {'next': None, 'previous': None},
   'count': 38,
   'results': [{'movie': {'imdb_id': 'tt0926084',
      'title': 'Harry Potter and the Deathly Hallows: Part 1'},
@@ -1637,8 +1637,8 @@ film_awards = {
     'year': 2011,
     'type': 'Winner',
     'award_name': 'World Soundtrack Award',
-    'award': 'Soundtrack Composer of the Year'}]},
- {'links': {'next': None, 'previous': None},
+    'award': 'Soundtrack Composer of the Year'}]}, \
+    {'links': {'next': None, 'previous': None},
   'count': 35,
   'results': [{'movie': {'imdb_id': 'tt0304141',
      'title': 'Harry Potter and the Prisoner of Azkaban'},
@@ -2062,8 +2062,8 @@ film_awards = {
     'year': 2004,
     'type': 'Winner',
     'award_name': 'Public Choice Award',
-    'award': ''}]},
- {'links': {'next': None, 'previous': None},
+    'award': ''}]}, \
+    {'links': {'next': None, 'previous': None},
   'count': 32,
   'results': [{'movie': {'imdb_id': 'tt0417741',
      'title': 'Harry Potter and the Half-Blood Prince'},
@@ -2473,8 +2473,8 @@ film_awards = {
     'year': 2010,
     'type': 'Nominee',
     'award_name': 'Young Artist Award',
-    'award': 'Best Performance in a Feature Film - Supporting Young Actress'}]},
- {'links': {'next': None, 'previous': None},
+    'award': 'Best Performance in a Feature Film - Supporting Young Actress'}]}, \
+    {'links': {'next': None, 'previous': None},
   'count': 36,
   'results': [{'movie': {'imdb_id': 'tt0295297',
      'title': 'Harry Potter and the Chamber of Secrets'},
@@ -2909,8 +2909,8 @@ film_awards = {
     'year': 2003,
     'type': 'Nominee',
     'award_name': 'VES Award',
-    'award': 'Best Character Animation in a Live Action Motion Picture'}]},
- {'links': {'next': None, 'previous': None},
+    'award': 'Best Character Animation in a Live Action Motion Picture'}]}, \
+    {'links': {'next': None, 'previous': None},
   'count': 34,
   'results': [{'movie': {'imdb_id': 'tt0330373',
      'title': 'Harry Potter and the Goblet of Fire'},
@@ -3331,8 +3331,8 @@ film_awards = {
     'year': 2006,
     'type': 'Nominee',
     'award_name': 'World Soundtrack Award',
-    'award': 'Best Original Song Written for Film'}]},
- {'links': {'next': None, 'previous': None},
+    'award': 'Best Original Song Written for Film'}]}, \
+    {'links': {'next': None, 'previous': None},
   'count': 36,
   'results': [{'movie': {'imdb_id': 'tt0373889',
      'title': 'Harry Potter and the Order of the Phoenix'},
@@ -3767,9 +3767,11 @@ film_awards = {
     'award_name': 'World Soundtrack Award',
     'award': 'Discovery of the Year'}]}
 
-fa_doublequated = json.dumps(film_awards)
+# Створюємо файл film_awards.json та записуємо в нього значення змінної film_awards
+with open('film_awards.json', 'w') as fa:
+    json.dump(film_awards, fa, indent=4)
 
-fa_doublequated.replace("None", '"None"').replace("'", '"')
-
-print(fa_doublequated)
-
+## Читаємо файл film_awards.json
+# with open('film_awards.json', 'r') as fa_read:
+#     data = json.load(fa_read)
+# print(type(data))

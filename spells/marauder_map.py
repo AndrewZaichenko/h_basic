@@ -51,6 +51,9 @@ class MarauderMap(MapMagic):
     def map_generator(self):
         print(self._map_open)
 
+        with open(self.path, 'r') as film_awards_file:
+            film_awards = json.load(film_awards_file)
+
         # print(os.getcwd())
         os.mkdir("Harry Potter")
         os.chdir("Harry Potter")
@@ -75,22 +78,19 @@ class MarauderMap(MapMagic):
         for hp_title in self.__films_titles["results"]:
             hp_titles_list.append(hp_title["title"].replace(":", ""))
 
-        print(hp_titles_list)
+        # print(hp_titles_list)
 
         awards_list = {}
         key_template = ('type', 'award_name', 'award')
         temp_dict = {}
-
-        film_awards_file = open(self.path)
-        print(film_awards_file)
-        json.load(film_awards_file)
-
+        # print(os.getcwd())
         for movie_title in hp_titles_list:
-            print(movie_title)
-            for awards_item in film_awards_file:
+            # print(movie_title)
+            for awards_item in film_awards:
+                # print(awards_item)
                 if movie_title == awards_item["results"][0]["movie"]["title"].replace(":", ""):
-                    print("YEAH!!!")
-                    print(awards_item["results"][0]["movie"]["title"].replace(":", ""))
+                    # print("YEAH!!!")
+                    # print(awards_item["results"][0]["movie"]["title"].replace(":", ""))
                     temp_list = []
                     for res_item in awards_item["results"]:
                         # print(res_item["award_name"])
@@ -104,16 +104,16 @@ class MarauderMap(MapMagic):
 
         pprint.pprint(awards_list)
 
-        print(os.getcwd())
+        # print(os.getcwd())
         # os.chdir('Harry Potter')
         dir_list = os.listdir(os.getcwd())
-        print(dir_list)
+        # print(dir_list)
         for dir_title in dir_list:
             print(dir_title)
             for movie_title in awards_list:
                 if dir_title == movie_title:
-                    print("Match")
-                    print(movie_title)
+                    # print("Match")
+                    # print(movie_title)
                     os.chdir(dir_title)
                     letters_list = os.listdir(os.getcwd())
                     # print(letters_list)
@@ -131,10 +131,5 @@ class MarauderMap(MapMagic):
         print(self._map_close)
 
 
-mm_object_01 = MarauderMap('film_awards.json')
-print(mm_object_01.path)
+mm_object_01 = MarauderMap("film_awards.json")
 mm_object_01.map_generator()
-
-
-# '/spells/film_awards.json'
-
